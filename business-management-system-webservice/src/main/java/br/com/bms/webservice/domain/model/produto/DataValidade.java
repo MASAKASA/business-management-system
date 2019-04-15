@@ -2,18 +2,25 @@ package br.com.bms.webservice.domain.model.produto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="produtos_validades")
@@ -29,17 +36,17 @@ public class DataValidade implements Serializable{
 	@Temporal(value=TemporalType.DATE)
 	private Date dataValidade;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name = "produto_id", nullable = false)
-	private Produto produto;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinTable(
+			name = "produtos_validades",
+			joinColumns = @JoinColumn(name = "id_validade"),
+			inverseJoinColumns = @JoinColumn(name = "id_produto")
+	)
+	private List<Produto> listaProdutos;
 
 	public DataValidade() {
 		super();
-	}
-
-	@Override
-	public String toString() {
-		return "DataValidade [id=" + id + ", dataValidade=" + dataValidade + ", produto=" + produto + "]";
 	}
 
 	@Override
@@ -83,11 +90,11 @@ public class DataValidade implements Serializable{
 		this.dataValidade = dataValidade;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public List<Produto> getListaProdutos() {
+		return listaProdutos;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setListaProdutos(List<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
 	}
 }

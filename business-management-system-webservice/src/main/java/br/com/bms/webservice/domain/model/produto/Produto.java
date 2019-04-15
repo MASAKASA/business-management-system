@@ -63,10 +63,6 @@ public class Produto implements Serializable {
 	@Size(max=50)
 	private String descricao;
 	
-	@Size(max=255)
-	@Column(name="foto_url")
-	private String fotoUrl;
-	
 	@NotBlank
 	@DecimalMin("0.000")
 	private Float peso;
@@ -102,8 +98,13 @@ public class Produto implements Serializable {
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Marca marca;
 	
-	@OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinTable(
+			name = "produtos_validades",
+			joinColumns = @JoinColumn(name = "id_produto"),
+			inverseJoinColumns = @JoinColumn(name = "id_validade")
+	)
 	private List<DataValidade> listaDatasDeValidade;
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
@@ -144,31 +145,6 @@ public class Produto implements Serializable {
 	
 	public Produto() {
 		super();
-	}
-	
-	public void addDataValidade(DataValidade dataValidade) {
-		if (listaDatasDeValidade == null) {
-			listaDatasDeValidade = new ArrayList<DataValidade>();
-		}
-		dataValidade.setProduto(this);
-		listaDatasDeValidade.add(dataValidade);
-	}
-	
-	public void delDataValidade(DataValidade dataValidade) {
-		if (listaDatasDeValidade != null) {
-			listaDatasDeValidade.remove(dataValidade);
-		}
-	}
-
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", estoque=" + estoque + ", codigoDeBarras=" + codigoDeBarras + ", nome=" + nome
-				+ ", descricao=" + descricao + ", fotoUrl=" + fotoUrl + ", peso=" + peso + ", quantidadeMinimaEstoque="
-				+ quantidadeMinimaEstoque + ", estoqueAlta=" + estoqueAlta + ", giroDoProduto=" + giroDoProduto
-				+ ", statusProduto=" + statusProduto + ", genero=" + genero + ", unidade=" + unidade
-				+ ", tabelaDePreco=" + tabelaDePreco + ", marca=" + marca + ", listaDatasDeValidade="
-				+ listaDatasDeValidade + ", listaCategoria=" + listaCategoria + ", listaLoja=" + listaLoja
-				+ ", listaPromocoes=" + listaPromocoes + ", listaFornecedores=" + listaFornecedores + "]";
 	}
 
 	@Override
@@ -236,14 +212,6 @@ public class Produto implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getFotoUrl() {
-		return fotoUrl;
-	}
-
-	public void setFotoUrl(String fotoUrl) {
-		this.fotoUrl = fotoUrl;
-	}
-
 	public Float getPeso() {
 		return peso;
 	}
@@ -298,6 +266,14 @@ public class Produto implements Serializable {
 
 	public void setUnidade(UnidadeEnum unidade) {
 		this.unidade = unidade;
+	}
+
+	public TabelaDePreco getTabelaDePreco() {
+		return tabelaDePreco;
+	}
+
+	public void setTabelaDePreco(TabelaDePreco tabelaDePreco) {
+		this.tabelaDePreco = tabelaDePreco;
 	}
 
 	public Marca getMarca() {

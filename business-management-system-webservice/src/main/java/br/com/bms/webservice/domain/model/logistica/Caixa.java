@@ -3,6 +3,7 @@ package br.com.bms.webservice.domain.model.logistica;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,6 +45,10 @@ public class Caixa implements Serializable{
 	private BigDecimal saldoFinal;
 	
 	@NotBlank
+	@Column(name="data_funcionamento")
+	private Date dataFuncionamento; 
+	
+	@NotBlank
 	@Column(name="hora_abertura")
 	private Calendar horaAbertura;
 	
@@ -70,9 +75,9 @@ public class Caixa implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Caixa [id=" + id + ", saldoInicial=" + saldoInicial + ", saldoFinal=" + saldoFinal + ", horaAbertura="
-				+ horaAbertura + ", horaFechamento=" + horaFechamento + ", statusCaixa=" + statusCaixa
-				+ ", funcionario=" + funcionario + ", loja=" + loja + "]";
+		return "Caixa [id=" + id + ", saldoInicial=" + saldoInicial + ", saldoFinal=" + saldoFinal + ", dataFuncionamento=" + dataFuncionamento
+				+ ", horaAbertura=" + horaAbertura + ", horaFechamento=" + horaFechamento + ", statusCaixa="
+				+ statusCaixa + ", funcionario=" + funcionario + ", loja=" + loja + "]";
 	}
 
 	@Override
@@ -122,6 +127,14 @@ public class Caixa implements Serializable{
 
 	public void setSaldoFinal(BigDecimal saldoFinal) {
 		this.saldoFinal = saldoFinal;
+	}
+
+	public Date getDataFuncionamento() {
+		return dataFuncionamento;
+	}
+
+	public void setDataFuncionamento(Date dataFuncionamento) {
+		this.dataFuncionamento = dataFuncionamento;
 	}
 
 	public Calendar getHoraAbertura() {

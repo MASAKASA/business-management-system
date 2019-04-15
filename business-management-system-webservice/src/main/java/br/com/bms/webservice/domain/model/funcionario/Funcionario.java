@@ -74,10 +74,6 @@ public class Funcionario implements Serializable {
 	@Column(name="nome_usuario", nullable=false) 
 	private String nome;
 	
-	@Size(max=255)
-	@Column(name="foto_url") 
-	private String fotoUrl;
-	
 	@NotBlank
 	@Size(max=255)
 	private String naturalidade;
@@ -303,23 +299,6 @@ public class Funcionario implements Serializable {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Funcionario [id=" + id + ", dataNascimento=" + dataNascimento + ", dataNascimento=" + dataNascimento + ", dataDemissao="
-				+ dataDemissao + ", valorPensao=" + valorPensao + ", nome=" + nome + ", fotoUrl=" + fotoUrl
-				+ ", naturalidade=" + naturalidade + ", email=" + email + ", cpf=" + cpf + ", carteiraTrabalho="
-				+ carteiraTrabalho + ", nomeConjuge=" + nomeConjuge + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae
-				+ ", profissaoConjuge=" + profissaoConjuge + ", profissaoPai=" + profissaoPai + ", profissaoMae="
-				+ profissaoMae + ", pagaPensao=" + pagaPensao + ", veiculo=" + veiculo + ", sexo=" + sexo
-				+ ", escolaridade=" + escolaridade + ", estadoCivil=" + estadoCivil + ", perfil=" + perfil + ", setor="
-				+ setor + ", cargo=" + cargo + ", deficiencia=" + deficiencia + ", statusFuncionario="
-				+ statusFuncionario + ", endereco=" + endereco + ", lider=" + lider + ", loja=" + loja
-				+ ", listaSubordinados=" + listaSubordinados + ", listaVendasRelizadas=" + listaVendasRelizadas
-				+ ", listaClientes=" + listaClientes + ", listaFormacaoEscolar=" + listaFormacaoEscolar
-				+ ", listaContraCheques=" + listaContraCheques + ", listaTelefones=" + listaTelefones
-				+ ", listaDepententes=" + listaDepententes + "]";
-	}
-
 	//Metodo criado por boa pratica de programacao. So para o id
 	@Override
 	public int hashCode() {
@@ -393,14 +372,6 @@ public class Funcionario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getFotoUrl() {
-		return fotoUrl;
-	}
-
-	public void setFotoUrl(String fotoUrl) {
-		this.fotoUrl = fotoUrl;
 	}
 
 	public String getNaturalidade() {

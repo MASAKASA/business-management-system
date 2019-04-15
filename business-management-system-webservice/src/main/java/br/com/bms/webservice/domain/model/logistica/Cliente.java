@@ -72,7 +72,7 @@ public class Cliente implements Serializable {
 	@NotBlank
 	@DecimalMin("0.00")
 	@Column(name="limite_de_compra")
-	private BigDecimal limiteDeCompra;
+	private BigDecimal limiteDeCompra;// TODO criar uma entidades de debito do cliente
 	
 	@Column(name="saldo_devedor")
 	private BigDecimal saldoDevedor;
@@ -97,7 +97,7 @@ public class Cliente implements Serializable {
 	
 	@NotBlank
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name = "funcionario_id")
+	@JoinColumn(name = "vendedor_id")
 	private Funcionario vendedor;
 
 	@OneToMany(mappedBy = "cliente", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER) 

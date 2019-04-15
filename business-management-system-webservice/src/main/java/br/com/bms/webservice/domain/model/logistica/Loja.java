@@ -57,7 +57,7 @@ public class Loja implements Serializable {
 	@NotBlank
 	//@Verify(ParametroTipo.IE_PERNAMBUCO_PE_FORMATADO)
 	@Column(name="incricao_estadual")
-	private String inscricaoEstatual;
+	private String inscricaoEstadual;
 	
 	@NotBlank
 	@Size(max=20)
@@ -213,7 +213,7 @@ public class Loja implements Serializable {
 	@Override
 	public String toString() {
 		return "Loja [id=" + id + ", razaoSocial=" + razaoSocial + ", nomeFantasia=" + nomeFantasia
-				+ ", inscricaoEstatual=" + inscricaoEstatual + ", inscricaoMunicipal=" + inscricaoMunicipal + ", email="
+				+ ", inscricaoEstadual=" + inscricaoEstadual + ", inscricaoMunicipal=" + inscricaoMunicipal + ", email="
 				+ email + ", cnpj=" + cnpj + ", lojaEnun=" + lojaEnun + ", endereco=" + endereco + ", listaTelefones="
 				+ listaTelefones + ", listaFuncionarios=" + listaFuncionarios + ", listaFornecedores="
 				+ listaFornecedores + ", listaClientes=" + listaClientes + ", listaContas=" + listaContas
@@ -269,12 +269,12 @@ public class Loja implements Serializable {
 		this.nomeFantasia = nomeFantasia;
 	}
 
-	public String getInscricaoEstatual() {
-		return inscricaoEstatual;
+	public String getInscricaoEstadual() {
+		return inscricaoEstadual;
 	}
 
-	public void setInscricaoEstatual(String inscricaoEstatual) {
-		this.inscricaoEstatual = inscricaoEstatual;
+	public void setInscricaoEstadual(String inscricaoEstadual) {
+		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
 	public String getInscricaoMunicipal() {
